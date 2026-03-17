@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta charset="UTF-8" />
   <meta name="description" content="fadik22 | Этический хакер, специалист по кибербезопасности и пентестингу. Red Team, веб-эксплойты, OSINT и CTF." />
   <meta name="keywords" content="кибербезопасность, пентестинг, этический хакинг, red team, веб-хакинг, CTF" />
@@ -59,7 +61,28 @@
       z-index: 1000;
       padding: 16px 40px;
     }
+    a, button {
+  min-height: 44px;
+    }
+    html {
+  scroll-padding-top: 80px;
+    }
+    @media (max-width: 768px) {
 
+  .section:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .course-card:hover {
+    transform: none;
+  }
+
+  .skill-card:hover {
+    transform: none;
+  }
+
+}
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -530,12 +553,137 @@
   color: var(--accent);
   transform: translateX(8px);
 }
+/* 📱 MOBILE (до 768px) */
+@media (max-width: 768px) {
 
+  nav {
+    padding: 12px 16px;
+  }
+
+  .nav-links {
+    display: none; /* потом сделаем бургер */
+  }
+
+  header {
+    padding: 140px 16px 80px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-badges {
+    gap: 10px;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  main {
+    gap: 50px;
+  }
+
+  .section {
+    padding: 28px 20px;
+  }
+
+  .section h2 {
+    font-size: 1.4rem;
+  }
+
+  .skills-grid,
+  .projects-grid,
+  .courses-grid,
+  .telegram-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .course-card,
+  .project-card {
+    padding: 20px;
+  }
+
+  .project-card .img {
+    height: 140px;
+    font-size: 3rem;
+  }
+
+  footer {
+    padding: 40px 16px;
+  }
+
+}
+
+/* 📲 TABLET (768px–1024px) */
+@media (max-width: 1024px) {
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  main {
+    padding: 0 16px 80px;
+  }
+
+  .section {
+    padding: 36px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--violet);
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: rgba(10, 5, 18, 0.98);
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+}
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
+   <div class="menu-toggle" id="menu-toggle">
+  <i class="fas fa-bars"></i>
+    </div>
   <nav>
     <div class="nav-container">
       <div class="logo">
@@ -547,6 +695,7 @@
         <li><a href="#projects">Проекты</a></li>
         <li><a href="#channels">Каналы</a></li>
         <li><a href="#contact">Обратная связь</a></li>
+        <ul class="nav-links" id="nav-links"></ul>
       </ul>
     </div>
   </nav>
@@ -645,7 +794,7 @@
           <h3>Этический хакинг — уязвимости, взлом, защита</h3>
           <div class="meta"><i class="fas fa-book-open"></i> Stepik • 2026</div>
         </div>
-        <div class="students">845+</div>
+        <div class="students">934+</div>
       </div>
       <p style="color: var(--muted);">
         Полный цикл пентеста: Kali Linux, Nmap, Metasploit, Burp Suite, эксплуатация уязвимостей.
@@ -661,7 +810,7 @@
           <h3>Этичный Веб-Хакинг (CyberSecurity)</h3>
           <div class="meta"><i class="fas fa-book-open"></i> Stepik • 2026</div>
         </div>
-        <div class="students">229+</div>
+        <div class="students">269+</div>
       </div>
       <p style="color: var(--muted);">
         Глубокая веб-безопасность: XSS, SQLi, CSRF, SSRF, IDOR, современные векторы атак.
@@ -677,7 +826,7 @@
           <h3>Nmap + Сети (Сканирование и разведка)</h3>
           <div class="meta"><i class="fas fa-book-open"></i> Stepik • 2026</div>
         </div>
-        <div class="students">2400+</div>
+        <div class="students">2600+</div>
       </div>
       <p style="color: var(--muted);">
         Мастер-класс по Nmap: сканирование, анализ инфраструктуры, техники обхода обнаружения.
@@ -802,7 +951,7 @@
     <div class="telegram-item">
       <div class="header">
         <strong>@fadikCyberSecurity</strong>
-        <span class="students">439</span>
+        <span class="students">467</span>
       </div>
       <div class="channel-label">Кибербезопасность</div>
       <p style="color: var(--muted); font-size: 0.95rem; margin: 16px 0 24px;">
@@ -817,7 +966,7 @@
     <div class="telegram-item">
       <div class="header">
         <strong>@fadikHacking</strong>
-        <span class="students">300</span>
+        <span class="students">327</span>
       </div>
       <div class="channel-label">Хакинг</div>
       <p style="color: var(--muted); font-size: 0.95rem; margin: 16px 0 24px;">
@@ -832,7 +981,7 @@
     <div class="telegram-item">
       <div class="header">
         <strong>@news_ethical_hack</strong>
-        <span class="students">359</span>
+        <span class="students">401</span>
       </div>
       <div class="channel-label">Новости курсов</div>
       <p style="color: var(--muted); font-size: 0.95rem; margin: 16px 0 24px;">
@@ -847,7 +996,7 @@
     <div class="telegram-item">
       <div class="header">
         <strong>@fadiknext</strong>
-        <span class="students">424</span>
+        <span class="students">471</span>
       </div>
       <div class="channel-label">Изучение проекта fadik22</div>
       <p style="color: var(--muted); font-size: 0.95rem; margin: 16px 0 24px;">
@@ -1031,6 +1180,12 @@ window.addEventListener('load', () => {
   }
 
   window.addEventListener("load", typeLoop);
+const toggle = document.getElementById("menu-toggle");
+const nav = document.getElementById("nav-links");
+
+toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+});
 </script>
 
 
