@@ -1,1194 +1,1301 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta charset="UTF-8" />
   <meta name="description" content="fadik22 | Этический хакер, специалист по кибербезопасности и пентестингу. Red Team, веб-эксплойты, OSINT и CTF." />
   <meta name="keywords" content="кибербезопасность, пентестинг, этический хакинг, red team, веб-хакинг, CTF" />
   <title>fadik22 | Cybersecurity Portfolio</title>
-  <link rel="icon" href="fadik.jpg" type="image/png" sizes="32x32">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
   <style>
-    
     :root {
-      --bg: #0a0512;
-      --violet: #9b5cff;
-      --violet-soft: #c9a8ff;
-      --neon-violet: #d4a5ff;
-      --card: rgba(155, 92, 255, 0.06);
-      --border: rgba(155, 92, 255, 0.18);
-      --text: #e8e1ff;
-      --muted: #a396c8;
-      --accent: #00ff9d;
+      --bg: #050810;
+      --bg2: #080d1a;
+      --primary: #00e5ff;
+      --primary-dim: rgba(0, 229, 255, 0.12);
+      --primary-glow: rgba(0, 229, 255, 0.35);
+      --accent: #ff3d71;
+      --accent2: #7c3aed;
+      --green: #00ff9d;
+      --text: #e2eaff;
+      --muted: #6b7fa3;
+      --card: rgba(255,255,255,0.03);
+      --card-border: rgba(0,229,255,0.1);
+      --card-hover: rgba(0,229,255,0.07);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-padding-top: 72px; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(ellipse at 50% 10%, #1a0f2e 0%, var(--bg) 70%);
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
       overflow-x: hidden;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    /* Neon Glow Effect */
-    .neon-text {
-      text-shadow: 
-        0 0 10px var(--violet),
-        0 0 20px var(--violet),
-        0 0 40px var(--neon-violet),
-        0 0 80px var(--violet);
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
     }
 
-    /* Navbar */
+    /* ─── SCANLINES ─── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ─── NAVBAR ─── */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(10, 5, 18, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      top: 0; left: 0; right: 0;
       z-index: 1000;
-      padding: 16px 40px;
+      background: rgba(5,8,16,0.88);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
     }
-    a, button {
-  min-height: 44px;
-    }
-    html {
-  scroll-padding-top: 80px;
-    }
-    @media (max-width: 768px) {
 
-  .section:hover {
-    transform: none;
-    box-shadow: none;
-  }
-
-  .course-card:hover {
-    transform: none;
-  }
-
-  .skill-card:hover {
-    transform: none;
-  }
-
-}
-    .nav-container {
+    .nav-inner {
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 24px;
+      height: 68px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
 
     .logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 1.25rem;
       font-weight: 700;
-      color: var(--violet);
+      color: var(--primary);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      text-decoration: none;
+      letter-spacing: -0.02em;
     }
+
+    .logo-bracket { color: var(--accent); }
 
     .nav-links {
       display: flex;
-      gap: 32px;
+      gap: 8px;
       list-style: none;
     }
 
     .nav-links a {
-      color: var(--text);
-      text-decoration: none;
+      font-size: 0.88rem;
       font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
     }
 
     .nav-links a:hover {
-      color: var(--violet);
+      color: var(--primary);
+      background: var(--primary-dim);
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(to right, var(--violet), var(--accent));
-      transition: width 0.3s ease;
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--card-border);
+      color: var(--primary);
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      min-height: 36px;
     }
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero */
+    /* ─── HERO ─── */
     header {
-      padding: 180px 20px 120px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      padding: 100px 24px 60px;
       position: relative;
       overflow: hidden;
     }
-    
 
-    .hero-bg {
+    .hero-grid {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        linear-gradient(45deg, rgba(155,92,255,0.03) 25%, transparent 25%) 0 0 / 60px 60px,
-        linear-gradient(45deg, transparent 75%, rgba(155,92,255,0.03) 75%) 30px 30px / 60px 60px;
-      opacity: 0.4;
-      z-index: -1;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     }
 
-    header h1 {
-      font-size: clamp(3.2rem, 8vw, 5.5rem);
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .hero-orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,229,255,0.12), transparent 70%);
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .hero-orb-2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
+      bottom: 0; right: 10%;
+    }
+
+    .hero-orb-3 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(255,61,113,0.1), transparent 70%);
+      bottom: 100px; left: 5%;
+    }
+
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--primary);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--primary-dim);
+      border: 1px solid rgba(0,229,255,0.2);
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      display: inline-block;
+    }
+
+    .hero-name {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(3.5rem, 10vw, 7rem);
       font-weight: 700;
-      background: linear-gradient(90deg, var(--violet), #ffffff, var(--accent));
+      line-height: 1;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, #fff 100%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: titlePulse 4s ease-in-out infinite;
+      animation: shimmer 4s linear infinite;
+      margin-bottom: 16px;
     }
 
-    @keyframes titlePulse {
-      0%, 100% { filter: brightness(1); }
-      50% { filter: brightness(1.2); }
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
 
-    header .subtitle {
-      font-size: 1.35rem;
+    .hero-sub {
+      font-size: 1.15rem;
       color: var(--muted);
-      max-width: 620px;
-      margin: 24px auto 0;
-      opacity: 0.9;
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
     }
+
+    .hero-sub span { color: var(--primary); }
+
+    .terminal-line {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--green);
+      background: rgba(0,255,157,0.05);
+      border: 1px solid rgba(0,255,157,0.15);
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 40px;
+      min-width: 340px;
+      text-align: left;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px; height: 14px;
+      background: var(--green);
+      vertical-align: middle;
+      margin-left: 2px;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
 
     .hero-badges {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-top: 40px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
     .badge {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
       background: var(--card);
-      border: 1px solid var(--border);
-      padding: 8px 18px;
-      border-radius: 50px;
-      font-size: 0.9rem;
+      border: 1px solid var(--card-border);
+      padding: 8px 16px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.3s ease;
+      transition: all 0.25s;
     }
+
+    .badge i { color: var(--primary); font-size: 0.9rem; }
 
     .badge:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 0 25px rgba(155,92,255,0.4);
+      background: var(--primary-dim);
+      border-color: var(--primary);
+      transform: translateY(-2px);
     }
 
-    /* Scroll Indicator */
-    .scroll-down {
+    .scroll-hint {
       position: absolute;
-      bottom: 40px;
+      bottom: 32px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 1.8rem;
-      color: var(--violet);
-      animation: bounce 2s infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: float 2s ease-in-out infinite;
     }
 
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-      40%, 60% { transform: translateX(-50%) translateY(10px); }
+    @keyframes float {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
     }
 
-    /* Main */
+    /* ─── MAIN ─── */
     main {
-      max-width: 1180px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px 100px;
-      display: grid;
-      gap: 80px;
+      padding: 60px 24px 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
     }
 
+    /* ─── SECTION ─── */
     .section {
-      background: linear-gradient(145deg, var(--card), rgba(20, 10, 40, 0.4));
-      border: 1px solid var(--border);
-      border-radius: 28px;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
       padding: 48px;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      background: linear-gradient(145deg, var(--card), rgba(8,13,26,0.6));
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .section:hover {
+      border-color: rgba(0,229,255,0.2);
+      box-shadow: 0 0 60px -20px var(--primary-glow);
+    }
+
+    .section-corner {
+      position: absolute;
+      top: 0; right: 0;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle at top right, rgba(0,229,255,0.06), transparent 70%);
+      pointer-events: none;
+    }
+
+    .section-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .section-title .num {
+      font-size: 0.75rem;
+      color: var(--primary);
+      font-weight: 400;
+      background: var(--primary-dim);
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 36px;
+      max-width: 680px;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+      margin: 28px 0;
+    }
+
+    /* ─── FOCUS ─── */
+    .focus-text {
+      font-size: 1.2rem;
+      line-height: 1.75;
+      color: var(--text);
+      max-width: 760px;
+    }
+
+    .focus-text strong { color: var(--primary); }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      background: var(--card-hover);
+      border-color: var(--primary);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px -12px var(--primary-glow);
+    }
+
+    .skill-icon {
+      width: 52px; height: 52px;
+      background: var(--primary-dim);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+
+    .skill-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .skill-card p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── COURSES ─── */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .course-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
       position: relative;
       overflow: hidden;
     }
 
-    .section:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 60px -20px rgba(155, 92, 255, 0.25);
-    }
-
-    .section::before {
+    .course-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 40%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-      transition: 0.7s;
-    }
-
-    .section:hover::before {
-      left: 120%;
-    }
-
-    .section h2 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 2rem;
-      color: var(--violet);
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section h2::before {
-      content: '▶';
-      color: var(--accent);
-      font-size: 1.4rem;
-    }
-
-    /* Focus */
-    .focus p {
-      font-size: 1.15rem;
-      max-width: 720px;
-      color: var(--text);
-    }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 24px;
-    }
-
-    .skill-card {
-      background: rgba(155,92,255,0.08);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 28px 24px;
-      text-align: center;
-      transition: all 0.35s ease;
-      position: relative;
-    }
-
-    .skill-card:hover {
-      background: rgba(155,92,255,0.18);
-      border-color: var(--violet);
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 0 40px rgba(155,92,255,0.35);
-    }
-
-    .skill-card i {
-      font-size: 2.8rem;
-      margin-bottom: 18px;
-      color: var(--violet);
-    }
-
-    .skill-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 8px;
-    }
-
-    /* Courses */
-    .courses-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-    }
-
-    .course-card {
-      background: linear-gradient(135deg, rgba(155,92,255,0.12), rgba(0,255,157,0.04));
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.4s ease;
-      height: 100%;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,229,255,0.05) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
     .course-card:hover {
-      transform: translateY(-12px) rotate(1deg);
-      box-shadow: 0 25px 50px -12px rgba(155,92,255,0.4);
+      border-color: rgba(0,229,255,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px -15px var(--primary-glow);
     }
 
-    .course-card .top {
+    .course-card:hover::before { opacity: 1; }
+
+    .course-card.new-badge::after {
+      content: 'ПРЕДЗАКАЗ';
+      position: absolute;
+      top: 16px; right: 16px;
+      background: var(--accent);
+      color: white;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      letter-spacing: 0.1em;
+    }
+
+    .course-platform {
+      font-size: 0.72rem;
+      font-family: 'Space Mono', monospace;
+      color: var(--primary);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 20px;
+      align-items: center;
+      gap: 6px;
     }
 
     .course-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      line-height: 1.4;
     }
 
-    .course-card .meta {
+    .course-card p {
+      font-size: 0.88rem;
       color: var(--muted);
-      font-size: 0.92rem;
+      flex: 1;
+      line-height: 1.6;
     }
 
-    .course-card .students {
-      font-family: 'JetBrains Mono', monospace;
-      background: rgba(155,92,255,0.15);
-      padding: 4px 14px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      display: inline-block;
+    .course-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--card-border);
     }
 
-    /* Projects */
+    .student-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .course-arrow {
+      color: var(--primary);
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .course-card:hover .course-arrow { transform: translateX(4px); }
+
+    /* ─── PROJECTS ─── */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
     }
 
     .project-card {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
       overflow: hidden;
-      transition: all 0.4s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.3s ease;
     }
 
     .project-card:hover {
-      transform: scale(1.04);
+      border-color: rgba(0,229,255,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px -15px var(--primary-glow);
     }
 
-    .project-card .img {
-      height: 180px;
-      background: linear-gradient(45deg, #3a1f6e, #1e0f38);
+    .project-thumb {
+      height: 140px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4rem;
-      color: var(--violet);
+      font-size: 3.5rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .project-card .content {
-      padding: 24px;
+    .project-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(5,8,16,0.8));
     }
 
-    .project-card .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 16px;
+    .project-content { padding: 20px; }
+
+    .project-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
     }
+
+    .project-content p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
 
     .tag {
-      background: rgba(155,92,255,0.2);
-      color: var(--violet-soft);
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 20px;
+      font-size: 0.7rem;
+      background: rgba(0,229,255,0.08);
+      color: var(--primary);
+      border: 1px solid rgba(0,229,255,0.15);
+      padding: 3px 9px;
+      border-radius: 4px;
     }
 
-    /* Telegram */
+    .project-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ─── TELEGRAM ─── */
     .telegram-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
     }
 
-    .telegram-item {
-      background: rgba(155,92,255,0.1);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 28px;
-      transition: all 0.3s ease;
-    }
-
-    .telegram-item:hover {
-      background: rgba(155,92,255,0.25);
-      border-color: var(--violet);
-    }
-
-    .telegram-item .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .telegram-item strong {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.15rem;
-    }
-
-    .telegram-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(90deg, var(--violet), #a56eff);
-      color: white;
-      padding: 12px 28px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(155,92,255,0.5);
-    }
-
-    .telegram-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(155,92,255,0.7);
-    }
-
-    /* Contact */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-
-    .contact-item {
-      background: rgba(10,5,18,0.6);
-      border: 1px solid var(--border);
+    .tg-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
       padding: 24px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
       transition: all 0.3s;
     }
 
+    .tg-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(0,229,255,0.25);
+      transform: translateY(-4px);
+    }
+
+    .tg-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+
+    .tg-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.92rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .tg-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .tg-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      background: rgba(0,255,157,0.08);
+      color: var(--green);
+      border: 1px solid rgba(0,255,157,0.15);
+      padding: 3px 10px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    .tg-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .tg-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, rgba(0,229,255,0.15), rgba(0,229,255,0.08));
+      border: 1px solid rgba(0,229,255,0.2);
+      color: var(--primary);
+      padding: 9px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.25s;
+    }
+
+    .tg-btn:hover {
+      background: var(--primary-dim);
+      border-color: var(--primary);
+      box-shadow: 0 4px 20px -4px var(--primary-glow);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s;
+    }
+
     .contact-item:hover {
-      background: rgba(155,92,255,0.08);
+      background: var(--card-hover);
+      border-color: var(--primary);
+      transform: translateY(-3px);
     }
 
-    .contact-item i {
-      font-size: 2rem;
-      color: var(--accent);
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--primary-dim);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--primary);
+      flex-shrink: 0;
     }
 
-    /* Footer */
+    .contact-item strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+
+    .contact-item span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ─── FOOTER ─── */
     footer {
-      background: #05030a;
-      padding: 60px 20px 40px;
+      background: var(--bg2);
+      border-top: 1px solid rgba(0,229,255,0.06);
+      padding: 48px 24px 32px;
       text-align: center;
-      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+    .footer-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: block;
     }
 
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 30px;
-      margin-bottom: 30px;
+      gap: 24px;
       flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
     .footer-links a {
       color: var(--muted);
       text-decoration: none;
-      transition: color 0.3s;
+      font-size: 0.85rem;
+      transition: color 0.2s;
     }
 
-    .footer-links a:hover {
-      color: var(--violet);
+    .footer-links a:hover { color: var(--primary); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
     }
 
-    /* Animations */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
+    /* ─── STAT BAR ─── */
+    .stat-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1px;
+      background: var(--card-border);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    .stat-item {
+      background: var(--bg);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .animate {
-      animation: fadeInUp 0.9s forwards;
+    .fade-in { opacity: 0; }
+    .fade-in.visible { animation: fadeUp 0.7s forwards; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: rgba(5,8,16,0.97); padding: 16px 24px 24px; border-bottom: 1px solid var(--card-border); gap: 4px; }
+      .nav-links.open a { padding: 10px 12px; border-radius: 8px; font-size: 0.95rem; }
+      .menu-toggle { display: block; }
+      header { padding: 80px 20px 60px; min-height: 90vh; }
+      .hero-name { font-size: 3.2rem; }
+      .section { padding: 28px 20px; }
+      .section-title { font-size: 1.2rem; }
+      .skills-grid, .courses-grid, .projects-grid, .telegram-grid, .contact-grid { grid-template-columns: 1fr; }
+      .stat-bar { grid-template-columns: 1fr 1fr; }
+      .terminal-line { min-width: unset; width: 100%; font-size: 0.78rem; }
+      main { gap: 40px; padding: 40px 16px 80px; }
     }
-
-    /* Terminal cursor */
-    .cursor {
-      display: inline-block;
-      width: 6px;
-      height: 18px;
-      background: var(--accent);
-      vertical-align: middle;
-      animation: blink 0.8s step-end infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-
-.course-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px -10px rgba(0, 255, 157, 0.3);
-}
-
-.course-card:hover > div:last-child {
-  color: var(--accent);
-  transform: translateX(8px);
-}
-/* 📱 MOBILE (до 768px) */
-@media (max-width: 768px) {
-
-  nav {
-    padding: 12px 16px;
-  }
-
-  .nav-links {
-    display: none; /* потом сделаем бургер */
-  }
-
-  header {
-    padding: 140px 16px 80px;
-  }
-
-  header h1 {
-    font-size: 2.5rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  .hero-badges {
-    gap: 10px;
-  }
-
-  .badge {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-  }
-
-  main {
-    gap: 50px;
-  }
-
-  .section {
-    padding: 28px 20px;
-  }
-
-  .section h2 {
-    font-size: 1.4rem;
-  }
-
-  .skills-grid,
-  .projects-grid,
-  .courses-grid,
-  .telegram-grid,
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .course-card,
-  .project-card {
-    padding: 20px;
-  }
-
-  .project-card .img {
-    height: 140px;
-    font-size: 3rem;
-  }
-
-  footer {
-    padding: 40px 16px;
-  }
-
-}
-
-/* 📲 TABLET (768px–1024px) */
-@media (max-width: 1024px) {
-
-  .nav-links {
-    gap: 16px;
-  }
-
-  main {
-    padding: 0 16px 80px;
-  }
-
-  .section {
-    padding: 36px;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-}
-.menu-toggle {
-  display: none;
-  font-size: 1.5rem;
-  color: var(--violet);
-  cursor: pointer;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: rgba(10, 5, 18, 0.98);
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    display: none;
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-}
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-   <div class="menu-toggle" id="menu-toggle">
-  <i class="fas fa-bars"></i>
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#"><span class="logo-bracket">[</span>fadik22<span class="logo-bracket">]</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Меню"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#skills">Навыки</a></li>
+      <li><a href="#courses">Курсы</a></li>
+      <li><a href="#projects">Проекты</a></li>
+      <li><a href="#channels">Telegram</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<header>
+  <div class="hero-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+
+  <div class="hero-tag">// Этический хакер &amp; Преподаватель</div>
+  <h1 class="hero-name">fadik22</h1>
+  <p class="hero-sub">
+    <span>Red Team</span> &nbsp;·&nbsp; Web Application Security &nbsp;·&nbsp; <span>Bug Bounty</span>
+  </p>
+
+  <div class="terminal-line" id="terminalLine">&nbsp;<span class="cursor"></span></div>
+
+  <div class="hero-badges">
+    <div class="badge"><i class="fas fa-shield-alt"></i> Cybersec Specialist</div>
+    <div class="badge"><i class="fas fa-bug"></i> Bug Bounty Hunter</div>
+    <div class="badge"><i class="fas fa-terminal"></i> Kali Linux Pro</div>
+    <div class="badge"><i class="fas fa-graduation-cap"></i> 5000+ студентов</div>
+  </div>
+
+  <div class="scroll-hint">
+    <i class="fas fa-chevron-down"></i>
+    scroll
+  </div>
+</header>
+
+<!-- ─── MAIN ─── -->
+<main>
+
+  <!-- FOCUS -->
+  <section class="section fade-in" id="focus">
+    <div class="section-corner"></div>
+    <div class="section-title">
+      <span class="num">01</span>
+      О проекте
     </div>
-  <nav>
-    <div class="nav-container">
-      <div class="logo">
-        <span style="color: var(--accent);">❯</span> fadik22
-      </div>
-      <ul class="nav-links">
-        <li><a href="#skills">Навыки</a></li>
-        <li><a href="#courses">Курсы</a></li>
-        <li><a href="#projects">Проекты</a></li>
-        <li><a href="#channels">Каналы</a></li>
-        <li><a href="#contact">Обратная связь</a></li>
-        <ul class="nav-links" id="nav-links"></ul>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <header>
-    <div class="hero-bg"></div>
-    <h1 class="neon-text">fadik22</h1>
-    
-<p class="subtitle">
-  White Hacker • Red Team • Web Application Security
-</p>
-
-<p id="terminal-line"
-   style="font-family: 'JetBrains Mono', monospace; 
-          color: var(--accent); 
-          margin-top: 20px;">
-</p>
-
-
+    <div class="divider"></div>
+    <p class="focus-text">
+      Цель <strong>fadikProject</strong> — глубоко и полностью погрузить вас в изучение <strong>Red Team</strong>, эксплуатацию веб-уязвимостей и сферу хакинга. Проверенные курсы, живые каналы и реальные практики — всё в одном месте.
     </p>
-    
-    <div class="hero-badges">
-      <div class="badge"><i class="fas fa-shield-alt"></i> Cybersec Specialist </div>
-      <div class="badge"><i class="fas fa-bug"></i> Bug Bounty Hunter</div>
-      <div class="badge"><i class="fas fa-terminal"></i> Kali Linux Pro</div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section fade-in" id="skills">
+    <div class="section-corner"></div>
+    <div class="section-title"><span class="num">02</span> Навыки</div>
+    <p class="section-desc">Стек инструментов и техник, которые я применяю и преподаю.</p>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Hacking &amp; Exploitation</h3>
+        <p>Metasploit · Burp Suite · Custom exploits</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fab fa-linux"></i></div>
+        <h3>Linux &amp; Bash</h3>
+        <p>Scripting · Automation · Forensics</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-globe"></i></div>
+        <h3>Web Pentesting</h3>
+        <p>OWASP · XSS · SQLi · SSRF · IDOR</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+        <h3>Networking</h3>
+        <p>Wireshark · Nmap · MITM</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-search"></i></div>
+        <h3>OSINT</h3>
+        <p>Recon · Social Engineering</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fab fa-python"></i></div>
+        <h3>Python для хакинга</h3>
+        <p>Сканеры · Снифферы · Эксплойты</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="section fade-in" id="courses">
+    <div class="section-corner"></div>
+    <div class="section-title"><span class="num">03</span> Курсы</div>
+    <p class="section-desc">Проверенные и актуальные курсы — от основ до реальных эксплуатаций.</p>
+
+    <div class="stat-bar">
+      <div class="stat-item">
+        <span class="stat-num" data-target="4000">0</span>
+        <span class="stat-label">Студентов</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="5">0</span>
+        <span class="stat-label">Курсов</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Платформы</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2026</span>
+        <span class="stat-label">Актуальный год</span>
+      </div>
     </div>
 
-    <div class="scroll-down">↓</div>
-  </header>
+    <div class="courses-grid">
 
-  <main>
-    
-    <!-- Focus -->
-    <section id="focus" class="section focus">
-      <h2>Цель fadikProject</h2>
-      <p style="font-size: 1.25rem; max-width: 780px;">
-        Цель fadikProject - это глубоко и полностью погрузить вас в изучение Red Team, эксплуатацию веб-уязвимостей и сферу хакинга. 
-      </p>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills" class="section">
-      <h2>Навыки</h2>
-      <div class="skills-grid">
-        <div class="skill-card animate">
-          <i class="fas fa-bolt"></i>
-          <h3>Hacking &amp; Exploitation</h3>
-          <p style="color: var(--muted); font-size: 0.92rem;">Metasploit • Burp Suite • Custom exploits</p>
+      <!-- 1 -->
+      <a href="https://stepik.org/course/229484" target="_blank" class="course-card">
+        <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> Stepik · 2026</div>
+        <h3>Этический хакинг — уязвимости, взлом, защита</h3>
+        <p>Полный цикл пентеста: Kali Linux, Nmap, Metasploit, Burp Suite, эксплуатация уязвимостей с нуля до специалиста.</p>
+        <div class="course-footer">
+          <span class="student-count"><i class="fas fa-users" style="font-size:0.7rem"></i> 1000+ студентов</span>
+          <span class="course-arrow"><i class="fas fa-arrow-right"></i></span>
         </div>
-        <div class="skill-card animate" style="animation-delay: 0.1s;">
-          <i class="fab fa-linux"></i>
-          <h3>Linux &amp; Bash</h3>
-          <p style="color: var(--muted); font-size: 0.92rem;">Scripting • Automation • Forensics</p>
-        </div>
-        <div class="skill-card animate" style="animation-delay: 0.2s;">
-          <i class="fas fa-globe"></i>
-          <h3>Web Pentesting</h3>
-          <p style="color: var(--muted); font-size: 0.92rem;">OWASP • XSS • SQLi • SSRF • IDOR</p>
-        </div>
-        <div class="skill-card animate" style="animation-delay: 0.3s;">
-          <i class="fas fa-network-wired"></i>
-          <h3>Networking</h3>
-          <p style="color: var(--muted); font-size: 0.92rem;">Wireshark • Nmap • MITM</p>
-        </div>
-        <div class="skill-card animate" style="animation-delay: 0.4s;">
-          <i class="fas fa-search"></i>
-          <h3>OSINT</h3>
-          <p style="color: var(--muted); font-size: 0.92rem;">Recon • Social Engineering</p>
-        </div>
-        <div class="skill-card animate" style="animation-delay: 0.5s;">
-          <i class="fas fa-flag"></i>
-          <h3>CTF Mindset</h3>
-          <p style="color: var(--muted); font-size: 0.92rem;">Reverse • Crypto • Pwn</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Courses -->
-<section id="courses" class="section">
-  <h2>
-    <i class="fas fa-graduation-cap" style="margin-right: 12px; color: var(--accent);"></i>
-    Уникальные курсы которые ориентированы на качество
-  </h2>
-  
-  <p style="color: var(--muted); font-size: 1.1rem; max-width: 780px; margin: 0 auto 40px; text-align: center; line-height: 1.5;">
-    Проверенные и актуальные курсы от меня, которые помогут быстро войти в тему: от основ до реальных эксплуатаций веб-уязвимостей. 
-  </p>
-
-  <div class="courses-grid">
-    
-    <!-- 1 -->
-    <a href="https://stepik.org/course/229484" target="_blank" class="course-card" style="text-decoration: none; color: inherit; position: relative; overflow: hidden;">
-      <div class="top">
-        <div>
-          <h3>Этический хакинг — уязвимости, взлом, защита</h3>
-          <div class="meta"><i class="fas fa-book-open"></i> Stepik • 2026</div>
-        </div>
-        <div class="students">934+</div>
-      </div>
-      <p style="color: var(--muted);">
-        Полный цикл пентеста: Kali Linux, Nmap, Metasploit, Burp Suite, эксплуатация уязвимостей.
-      </p>
-      <div class="course-label">Полное обучение хакингу</div>
-      <div style="margin-top: auto; padding-top: 20px; text-align: right; color: var(--violet); font-size: 1.6rem; transition: all 0.3s;">→</div>
-    </a>
-    
-    <!-- 2 -->
-    <a href="https://stepik.org/course/266288" target="_blank" class="course-card" style="text-decoration: none; color: inherit; position: relative; overflow: hidden;">
-      <div class="top">
-        <div>
-          <h3>Этичный Веб-Хакинг (CyberSecurity)</h3>
-          <div class="meta"><i class="fas fa-book-open"></i> Stepik • 2026</div>
-        </div>
-        <div class="students">269+</div>
-      </div>
-      <p style="color: var(--muted);">
-        Глубокая веб-безопасность: XSS, SQLi, CSRF, SSRF, IDOR, современные векторы атак.
-      </p>
-      <div class="course-label">Специализация по веб-уязвимостям</div>
-      <div style="margin-top: auto; padding-top: 20px; text-align: right; color: var(--violet); font-size: 1.6rem; transition: all 0.3s;">→</div>
-    </a>
-    
-    <!-- 3 -->
-    <a href="https://stepik.org/course/227643" target="_blank" class="course-card" style="text-decoration: none; color: inherit; position: relative; overflow: hidden;">
-      <div class="top">
-        <div>
-          <h3>Nmap + Сети (Сканирование и разведка)</h3>
-          <div class="meta"><i class="fas fa-book-open"></i> Stepik • 2026</div>
-        </div>
-        <div class="students">2600+</div>
-      </div>
-      <p style="color: var(--muted);">
-        Мастер-класс по Nmap: сканирование, анализ инфраструктуры, техники обхода обнаружения.
-      </p>
-      <div class="course-label">Практика сетевой разведки</div>
-      <div style="margin-top: auto; padding-top: 20px; text-align: right; color: var(--violet); font-size: 1.6rem; transition: all 0.3s;">→</div>
-    </a>
-    
-    <!-- 4 -->
-    <a href="https://webhacker.pro/course/21" target="_blank" class="course-card" style="text-decoration: none; color: inherit; position: relative; overflow: hidden;">
-      <div class="top">
-        <div>
-          <h3>Кибербезопасность: Основы</h3>
-          <div class="meta"><i class="fas fa-book-open"></i> WebHacker • 2026</div>
-        </div>
-        <div class="students">121+</div>
-      </div>
-      <p style="color: var(--muted);">
-        Модели угроз, криптография, базовые принципы защиты информации.
-      </p>
-      <div class="course-label">Фундамент кибербезопасности</div>
-      <div style="margin-top: auto; padding-top: 20px; text-align: right; color: var(--violet); font-size: 1.6rem; transition: all 0.3s;">→</div>
-    </a>
-    
-  </div>
-</section>
-
-    <!-- Projects -->
-<section id="projects" class="section">
-  <h2>
-    <i class="fas fa-rocket" style="margin-right: 12px; color: var(--accent);"></i>
-    Мои проекты и контент
-  </h2>
-
-  <p style="color: var(--muted); font-size: 1.1rem; max-width: 780px; margin: 0 auto 40px; text-align: center;">
-    То, что я создаю и поддерживаю: от коллекций материалов до видео-контента и лабораторных разборов.
-  </p>
-
-  <div class="projects-grid">
-    
-    <!-- 1. Russian-hacker-books -->
-    <a href="https://github.com/fadik22/Russian-hacker-books" target="_blank" class="project-card" style="text-decoration: none; color: inherit; display: block; position: relative;">
-      <div class="img"><i class="fas fa-book-skull" style="font-size: 4.5rem;"></i></div>
-      <div class="content">
-        <h3>Russian Hacker Books</h3>
-        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 16px;">
-          Крупнейшая подборка русскоязычных книг, PDF и руководств по этичному хакингу, пентесту, реверсу и Red Team. Постоянно обновляется.
-        </p>
-        <div class="tags">
-          <span class="tag">Книги</span>
-          <span class="tag">Русскоязычные</span>
-          <span class="tag">Ресурсы</span>
-          <span class="tag">GitHub</span>
-        </div>
-        <div style="margin-top: 20px; color: var(--violet); font-weight: 600; font-size: 0.95rem;">
-          Перейти в репозиторий →
-        </div>
-      </div>
-    </a>
-
-    <!-- 2. YouTube fadikCyberSecurity -->
-    <a href="https://www.youtube.com/@fadik3125" target="_blank" class="project-card" style="text-decoration: none; color: inherit; display: block; position: relative;">
-      <div class="img" style="background: linear-gradient(135deg, #ff0000, #b30000);">
-        <i class="fab fa-youtube" style="color: white; font-size: 5rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.6));"></i>
-      </div>
-      <div class="content">
-        <h3>fadikCyberSecurity</h3>
-        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 16px;">
-          Видео по кибербезопасности, пентесту, туториалам по инструментам и реальным кейсам на русском языке.
-        </p>
-        <div class="tags">
-          <span class="tag">YouTube</span>
-          <span class="tag">Writeups</span>
-          <span class="tag">Tutorials</span>
-          <span class="tag">Русский</span>
-        </div>
-        <div style="margin-top: 20px; color: var(--violet); font-weight: 600; font-size: 0.95rem;">
-          Смотреть канал →
-        </div>
-      </div>
-    </a>
-
-    <!-- 3. fadikCourse YouTube -->
-    <a href="https://www.youtube.com/@fadikCourse" target="_blank" class="project-card" style="text-decoration: none; color: inherit; display: block; position: relative;">
-      <div class="img" style="background: linear-gradient(135deg, #111111, #1a1a1a);">
-        <i class="fab fa-youtube" style="color: #ff0000; font-size: 5rem; filter: drop-shadow(0 0 12px rgba(255,0,0,0.7));"></i>
-      </div>
-      <div class="content">
-        <h3>fadikCourse</h3>
-        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 16px;">
-          Подборка переведённых и слитых видео по хакингу, пентесту, bug bounty и Red Team на русском языке. Полезные материалы из закрытых источников.
-        </p>
-        <div class="tags">
-          <span class="tag">YouTube</span>
-          <span class="tag">Переводы</span>
-          <span class="tag">Tutorials</span>
-          <span class="tag">Слитый контент</span>
-        </div>
-        <div style="margin-top: 20px; color: var(--violet); font-weight: 600; font-size: 0.95rem;">
-          Смотреть канал →
-        </div>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-    <!-- Telegram Channels -->
-<section id="channels" class="section">
-  <h2>
-    <i class="fab fa-telegram-plane" style="margin-right: 12px; color: var(--accent);"></i>
-    Мои Telegram-каналы
-  </h2>
-
-  <p style="color: var(--muted); font-size: 1.1rem; max-width: 780px; margin: 0 auto 40px; text-align: center; line-height: 1.5;">
-    Ежедневный полезный контент по сфере кибербезопасности и хакинга. 
-  </p>
-
-  <div class="telegram-grid">
-    
-    <!-- 1. @redteam_notes -->
-    <div class="telegram-item">
-      <div class="header">
-        <strong>@fadikCyberSecurity</strong>
-        <span class="students">467</span>
-      </div>
-      <div class="channel-label">Кибербезопасность</div>
-      <p style="color: var(--muted); font-size: 0.95rem; margin: 16px 0 24px;">
-        Только важные новости по кибербезопасности, хакингу и события касающиеся этой сферы.
-      </p>
-      <a href="https://t.me/fadikCyber" target="_blank" class="telegram-button">
-        <i class="fab fa-telegram-plane"></i> Подписаться
       </a>
-    </div>
-    
-    <!-- 2. @web_exploit_lab -->
-    <div class="telegram-item">
-      <div class="header">
-        <strong>@fadikHacking</strong>
-        <span class="students">327</span>
-      </div>
-      <div class="channel-label">Хакинг</div>
-      <p style="color: var(--muted); font-size: 0.95rem; margin: 16px 0 24px;">
-        Телеграмм канал по хакингу в котором содержится все нужное для хакинга.
-      </p>
-      <a href="https://t.me/+5IBduGEyXkgyNWUy" target="_blank" class="telegram-button">
-        <i class="fab fa-telegram-plane"></i> Подписаться
-      </a>
-    </div>
-    
-    <!-- 3. @ctf_daily -->
-    <div class="telegram-item">
-      <div class="header">
-        <strong>@news_ethical_hack</strong>
-        <span class="students">401</span>
-      </div>
-      <div class="channel-label">Новости курсов</div>
-      <p style="color: var(--muted); font-size: 0.95rem; margin: 16px 0 24px;">
-        Свежие новости по моим курсам по хакингу, содержится вся актуальная информация и розыгрыши.
-      </p>
-      <a href="https://t.me/news_ethical_hack" target="_blank" class="telegram-button">
-        <i class="fab fa-telegram-plane"></i> Подписаться
-      </a>
-    </div>
-    
-    <!-- 4. @infosec_reports -->
-    <div class="telegram-item">
-      <div class="header">
-        <strong>@fadiknext</strong>
-        <span class="students">471</span>
-      </div>
-      <div class="channel-label">Изучение проекта fadik22</div>
-      <p style="color: var(--muted); font-size: 0.95rem; margin: 16px 0 24px;">
-        Все телеграмм каналы и сыллки на изучение хакерства.
-      </p>
-      <a href="https://t.me/fadiknext" target="_blank" class="telegram-button">
-        <i class="fab fa-telegram-plane"></i> Подписаться
-      </a>
-    </div>
-    
-  </div>
-</section>
 
-    <!-- Contact -->
-    <section id="contact" class="section">
-      <h2>Связаться</h2>
-      <div class="contact-grid">
-        <a href="https://t.me/fadik22official" target="_blank" class="contact-item">
-          <i class="fab fa-telegram-plane"></i>
-          <div>
-            <strong>Telegram</strong>
-            <div style="color: var(--muted);">@fadik22official</div>
+      <!-- 2 -->
+      <a href="https://stepik.org/course/266288" target="_blank" class="course-card">
+        <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> Stepik · 2026</div>
+        <h3>Этичный Веб-Хакинг (CyberSecurity)</h3>
+        <p>Глубокая веб-безопасность: XSS, SQLi, CSRF, SSRF, IDOR, современные векторы атак и защита приложений.</p>
+        <div class="course-footer">
+          <span class="student-count"><i class="fas fa-users" style="font-size:0.7rem"></i> 350+ студентов</span>
+          <span class="course-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <!-- 3 -->
+      <a href="https://stepik.org/course/227643" target="_blank" class="course-card">
+        <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> Stepik · 2026</div>
+        <h3>Nmap + Сети (Сканирование и разведка)</h3>
+        <p>Мастер-класс по Nmap: сканирование, анализ инфраструктуры, техники обхода обнаружения. Самый популярный курс.</p>
+        <div class="course-footer">
+          <span class="student-count"><i class="fas fa-users" style="font-size:0.7rem"></i> 2800+ студентов</span>
+          <span class="course-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <!-- 4 -->
+      <a href="https://webhacker.pro/course/21" target="_blank" class="course-card">
+        <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> WebHacker · 2026</div>
+        <h3>Кибербезопасность: Основы</h3>
+        <p>Модели угроз, криптография, базовые принципы защиты информации. Идеально для старта в сфере.</p>
+        <div class="course-footer">
+          <span class="student-count"><i class="fas fa-users" style="font-size:0.7rem"></i> 150+ студентов</span>
+          <span class="course-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <!-- 5 NEW -->
+      <a href="https://stepik.org/a/282465" target="_blank" class="course-card new-badge">
+        <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> Stepik · 2026</div>
+        <h3>Python для хакеров (CyberSecurity)</h3>
+        <p>Структурированный путь от новичка до профи: пишите собственные сканеры, снифферы и инструменты для пентеста на Python.</p>
+        <div class="course-footer">
+          <span class="student-count"><i class="fas fa-fire" style="font-size:0.7rem; color:var(--accent)"></i> Новинка 2026</span>
+          <span class="course-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section fade-in" id="projects">
+    <div class="section-corner"></div>
+    <div class="section-title"><span class="num">04</span> Проекты</div>
+    <p class="section-desc">То, что я создаю и поддерживаю — материалы, видео и инструменты.</p>
+
+    <div class="projects-grid">
+
+      <!-- Russian Hacker Books -->
+      <a href="https://github.com/fadik22/Russian-hacker-books" target="_blank" class="project-card">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #0d1b2a, #1a3a5c);">
+          <i class="fas fa-book-skull" style="position:relative;z-index:1;color:var(--primary)"></i>
+        </div>
+        <div class="project-content">
+          <h3>Russian Hacker Books</h3>
+          <p>Крупнейшая подборка русскоязычных книг, PDF и руководств по этичному хакингу, пентесту, реверсу и Red Team.</p>
+          <div class="tags">
+            <span class="tag">Книги</span>
+            <span class="tag">PDF</span>
+            <span class="tag">GitHub</span>
+            <span class="tag">Ресурсы</span>
           </div>
-        </a>
-        <a href="mailto:fadik22@proton.me" class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <div>
-            <strong>Email</strong>
-            <div style="color: var(--muted);">fadik22@proton.me</div>
+          <div class="project-link">Перейти в репозиторий <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+      <!-- YouTube Main -->
+      <a href="https://www.youtube.com/@fadik3125" target="_blank" class="project-card">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #1a0505, #3d0000);">
+          <i class="fab fa-youtube" style="position:relative;z-index:1;color:#ff4444"></i>
+        </div>
+        <div class="project-content">
+          <h3>fadikCyberSecurity</h3>
+          <p>Видео по кибербезопасности, пентесту, туториалы по инструментам и разбор реальных кейсов на русском языке.</p>
+          <div class="tags">
+            <span class="tag">YouTube</span>
+            <span class="tag">Writeups</span>
+            <span class="tag">Tutorials</span>
           </div>
-        </a>
-        <a href="https://github.com/fadik22" target="_blank" class="contact-item">
-          <i class="fab fa-github"></i>
-          <div>
-            <strong>GitHub</strong>
-            <div style="color: var(--muted);">github.com/fadik22</div>
+          <div class="project-link">Смотреть канал <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+      <!-- YouTube Courses -->
+      <a href="https://www.youtube.com/@fadikCourse" target="_blank" class="project-card">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #111, #1c1c1c);">
+          <i class="fab fa-youtube" style="position:relative;z-index:1;color:#ff0000;filter:drop-shadow(0 0 12px rgba(255,0,0,0.6))"></i>
+        </div>
+        <div class="project-content">
+          <h3>fadikCourse</h3>
+          <p>Переведённые и редкие видео по хакингу, bug bounty и Red Team. Материалы из закрытых источников на русском.</p>
+          <div class="tags">
+            <span class="tag">YouTube</span>
+            <span class="tag">Переводы</span>
+            <span class="tag">Bug Bounty</span>
           </div>
+          <div class="project-link">Смотреть канал <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+      <!-- fadikVPN -->
+      <a href="https://t.me/fadikvpnbot" target="_blank" class="project-card">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #0a1a0f, #0d2e1a);">
+          <i class="fas fa-shield-halved" style="position:relative;z-index:1;color:var(--green)"></i>
+        </div>
+        <div class="project-content">
+          <h3>fadikVPN</h3>
+          <p>Мой VPN-бот в Telegram. Быстрый, надёжный и анонимный доступ к сети — напрямую через Telegram.</p>
+          <div class="tags">
+            <span class="tag">VPN</span>
+            <span class="tag">Telegram Bot</span>
+            <span class="tag">Анонимность</span>
+          </div>
+          <div class="project-link" style="color:var(--green)">Подключиться <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- TELEGRAM -->
+  <section class="section fade-in" id="channels">
+    <div class="section-corner"></div>
+    <div class="section-title"><span class="num">05</span> Telegram-каналы</div>
+    <p class="section-desc">Ежедневный контент по кибербезопасности, хакингу и обновления курсов.</p>
+
+    <div class="telegram-grid">
+
+      <div class="tg-card">
+        <div class="tg-header">
+          <div>
+            <div class="tg-name">@fadikCyberSecurity</div>
+            <div class="tg-label">Кибербезопасность</div>
+          </div>
+          <span class="tg-count">644+</span>
+        </div>
+        <p class="tg-desc">Важные новости по кибербезопасности, хакингу и события в сфере ИБ.</p>
+        <a href="https://t.me/fadikCyber" target="_blank" class="tg-btn">
+          <i class="fab fa-telegram-plane"></i> Подписаться
         </a>
       </div>
-    </section>
 
-  </main>
+      <div class="tg-card">
+        <div class="tg-header">
+          <div>
+            <div class="tg-name">@fadikHacking</div>
+            <div class="tg-label">Хакинг</div>
+          </div>
+          <span class="tg-count">416+</span>
+        </div>
+        <p class="tg-desc">Всё необходимое для хакинга: инструменты, техники, обучающие материалы.</p>
+        <a href="https://t.me/+5IBduGEyXkgyNWUy" target="_blank" class="tg-btn">
+          <i class="fab fa-telegram-plane"></i> Подписаться
+        </a>
+      </div>
 
-  <footer>
+      <div class="tg-card">
+        <div class="tg-header">
+          <div>
+            <div class="tg-name">@news_ethical_hack</div>
+            <div class="tg-label">Новости курсов</div>
+          </div>
+          <span class="tg-count">480+</span>
+        </div>
+        <p class="tg-desc">Актуальные новости по моим курсам, обновления, акции и розыгрыши.</p>
+        <a href="https://t.me/news_ethical_hack" target="_blank" class="tg-btn">
+          <i class="fab fa-telegram-plane"></i> Подписаться
+        </a>
+      </div>
+
+      <div class="tg-card">
+        <div class="tg-header">
+          <div>
+            <div class="tg-name">@fadiknext</div>
+            <div class="tg-label">Hub проекта fadik22</div>
+          </div>
+          <span class="tg-count">673+</span>
+        </div>
+        <p class="tg-desc">Все каналы и ссылки проекта fadik22 — навигационный хаб для обучения.</p>
+        <a href="https://t.me/fadiknext" target="_blank" class="tg-btn">
+          <i class="fab fa-telegram-plane"></i> Подписаться
+        </a>
+      </div>
+
+      <div class="tg-card" style="border-color: rgba(0,229,255,0.2); background: rgba(0,229,255,0.04);">
+        <div class="tg-header">
+          <div>
+            <div class="tg-name">@fadikproject</div>
+            <div class="tg-label">Проект fadik22 · Новый</div>
+          </div>
+          <span class="tg-count" style="background:rgba(255,61,113,0.1);color:var(--accent);border-color:rgba(255,61,113,0.2)">NEW</span>
+        </div>
+        <p class="tg-desc">Официальный канал проекта fadik22 — главные новости, анонсы и контент.</p>
+        <a href="https://t.me/fadikproject" target="_blank" class="tg-btn">
+          <i class="fab fa-telegram-plane"></i> Подписаться
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section fade-in" id="contact">
+    <div class="section-corner"></div>
+    <div class="section-title"><span class="num">06</span> Связаться</div>
+    <p class="section-desc">Всегда открыт для вопросов, коллабораций и обратной связи.</p>
+
+    <div class="contact-grid">
+      <a href="https://t.me/fadik22official" target="_blank" class="contact-item">
+        <div class="contact-icon"><i class="fab fa-telegram-plane"></i></div>
+        <div>
+          <strong>Telegram</strong>
+          <span>@fadik22official</span>
+        </div>
+      </a>
+      <a href="mailto:fadik22@proton.me" class="contact-item">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <strong>Email</strong>
+          <span>fadik22@proton.me</span>
+        </div>
+      </a>
+      <a href="https://github.com/fadik22" target="_blank" class="contact-item">
+        <div class="contact-icon"><i class="fab fa-github"></i></div>
+        <div>
+          <strong>GitHub</strong>
+          <span>github.com/fadik22</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">[fadik22]</span>
     <div class="footer-links">
       <a href="https://t.me/fadik22official">Telegram</a>
       <a href="https://github.com/fadik22">GitHub</a>
+      <a href="https://t.me/fadiknext">Hub</a>
+      <a href="https://t.me/fadikproject">Канал</a>
     </div>
-    <p style="color: var(--muted); font-size: 0.9rem;">
-      © 2026 fadik • fadiknext </span>
-       
-    </p>
-    <p style="color: var(--muted); font-size: 0.9rem;"> Все права защищены</p>
-  </footer>
+    <p class="footer-copy">© 2026 fadik22 · fadikProject · Все права защищены</p>
+  </div>
+</footer>
 
-  <script>
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        if (this.getAttribute('href') !== '#') {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        }
-      });
-    });
+<script>
+// ─── TERMINAL TYPEWRITER ───
+const term = document.getElementById('terminalLine');
+const cmds = ['whoami', 'load @fadiknext', 'scan --target web', 'exploit --mode ethical', 'python hack.py', 'reboot'];
+let ci = 0, idx = 0, phase = 'type', txt = '';
 
-    // Intersection Observer for animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate');
-        }
-      });
-    }, {
-      threshold: 0.15
-    });
-
-    document.querySelectorAll('.section').forEach(section => {
-      observer.observe(section);
-    });
-
-    // Fake counter animation for one of the students (example)
-// Функция анимации счётчика
-function animateCounter(el, target, duration = 1800) {
-  let start = 0;
-  const stepTime = 30;                // ~33 кадра в секунду
-  const steps = Math.ceil(duration / stepTime);
-  const increment = target / steps;
-
-  let current = 0;
-
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-      el.textContent = target.toLocaleString('ru-RU') + '+';
-      clearInterval(timer);
-    } else {
-      // Показываем целое число + "+"
-      el.textContent = Math.floor(current).toLocaleString('ru-RU') + '+';
-    }
-  }, stepTime);
+function typeLoop() {
+  if (phase === 'type') {
+    txt = `fadik@fsociety:~# ${cmds[ci]}`;
+    term.innerHTML = txt.slice(0, idx) + '<span class="cursor"></span>';
+    idx++;
+    if (idx > txt.length) { phase = 'wait'; setTimeout(() => { phase = 'del'; idx = txt.length; }, 1400); }
+  } else if (phase === 'del') {
+    term.innerHTML = txt.slice(0, idx) + '<span class="cursor"></span>';
+    idx--;
+    if (idx < 0) { ci = (ci + 1) % cmds.length; phase = 'type'; idx = 0; }
+  }
+  setTimeout(typeLoop, phase === 'wait' ? 80 : 48);
 }
+typeLoop();
 
-// Запускаем анимацию для всех элементов .students при загрузке
-window.addEventListener('load', () => {
-  const counters = document.querySelectorAll('.students');
-  
-  counters.forEach((el, index) => {
-    setTimeout(() => {
-      const text = el.textContent.trim().replace(/[^0-9kK]/g, '');
-      let target = parseInt(text, 10);
-      if (text.toLowerCase().includes('k')) target *= 1000;
-      
-      if (!isNaN(target) && target > 0) {
-        el.textContent = '0+';
-        animateCounter(el, target, 1200 + index * 180);
-      }
-    }, index * 120); // запуск с интервалом ~120 мс
+// ─── NAV TOGGLE ───
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+// ─── SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
 
+// ─── INTERSECTION OBSERVER ───
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 
-    
-  </script>
-<script>
-  const terminal = document.getElementById("terminal-line");
-
-  const commands = [
-    "whoami",
-    "load @fadiknext",
-    "analyze potential",
-    "upgrade skillset",
-    "reboot"
-  ];
-
-  let currentCommand = 0;
-  let index = 0;
-  let phase = "typing";
-  let currentText = "";
-
-  function typeLoop() {
-
-    if (phase === "typing") {
-      currentText = `fadik@fsociety:~# ${commands[currentCommand]}`;
-      terminal.innerHTML =
-        currentText.substring(0, index) +
-        '<span class="cursor"></span>';
-
-      index++;
-
-      if (index > currentText.length) {
-        phase = "wait";
-        setTimeout(() => {
-          phase = "deleting";
-          index = currentText.length;
-        }, 1200);
-      }
-    }
-
-    else if (phase === "deleting") {
-      terminal.innerHTML =
-        currentText.substring(0, index) +
-        '<span class="cursor"></span>';
-
-      index--;
-
-      if (index < 0) {
-        currentCommand = (currentCommand + 1) % commands.length;
-        phase = "typing";
-        index = 0;
-      }
-    }
-
-    setTimeout(typeLoop, 55);
-  }
-
-  window.addEventListener("load", typeLoop);
-const toggle = document.getElementById("menu-toggle");
-const nav = document.getElementById("nav-links");
-
-toggle.addEventListener("click", () => {
-  nav.classList.toggle("active");
-});
+// ─── COUNTER ANIMATION ───
+const countIO = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseInt(el.dataset.target);
+    if (!target) return;
+    let current = 0;
+    const steps = 50, inc = target / steps;
+    const timer = setInterval(() => {
+      current += inc;
+      if (current >= target) { el.textContent = target.toLocaleString('ru-RU') + '+'; clearInterval(timer); }
+      else el.textContent = Math.floor(current).toLocaleString('ru-RU') + '+';
+    }, 30);
+    countIO.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => countIO.observe(el));
 </script>
-
-
 
 </body>
 </html>
