@@ -40,7 +40,6 @@
       line-height: 1.65;
     }
 
-    /* ─── NOISE TEXTURE OVERLAY ─── */
     body::before {
       content: '';
       position: fixed;
@@ -51,7 +50,6 @@
       opacity: 0.4;
     }
 
-    /* ─── SCANLINES ─── */
     body::after {
       content: '';
       position: fixed;
@@ -67,7 +65,6 @@
       z-index: 9998;
     }
 
-    /* ─── NAVBAR ─── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -139,7 +136,6 @@
       min-height: 36px;
     }
 
-    /* ─── HERO ─── */
     header {
       min-height: 100vh;
       display: flex;
@@ -305,7 +301,6 @@
       50% { transform: translateX(-50%) translateY(6px); }
     }
 
-    /* ─── MAIN ─── */
     main {
       max-width: 1200px;
       margin: 0 auto;
@@ -315,7 +310,6 @@
       gap: 64px;
     }
 
-    /* ─── SECTION ─── */
     .section {
       border: 1px solid var(--card-border);
       border-radius: 20px;
@@ -367,14 +361,12 @@
       max-width: 680px;
     }
 
-    /* ─── DIVIDER ─── */
     .divider {
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--card-border), transparent);
       margin: 28px 0;
     }
 
-    /* ─── FOCUS ─── */
     .focus-text {
       font-size: 1.2rem;
       line-height: 1.75;
@@ -384,7 +376,6 @@
 
     .focus-text strong { color: var(--primary); }
 
-    /* ─── SKILLS ─── */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -432,7 +423,6 @@
       line-height: 1.5;
     }
 
-    /* ─── COURSES ─── */
     .courses-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -535,7 +525,6 @@
 
     .course-card:hover .course-arrow { transform: translateX(4px); }
 
-    /* ─── PROJECTS ─── */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -611,7 +600,6 @@
       gap: 6px;
     }
 
-    /* ─── TELEGRAM ─── */
     .telegram-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -692,7 +680,6 @@
       box-shadow: 0 4px 20px -4px var(--primary-glow);
     }
 
-    /* ─── CONTACT ─── */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -741,7 +728,6 @@
       color: var(--muted);
     }
 
-    /* ─── FOOTER ─── */
     footer {
       background: var(--bg2);
       border-top: 1px solid rgba(0,229,255,0.06);
@@ -781,7 +767,6 @@
       color: var(--muted);
     }
 
-    /* ─── STAT BAR ─── */
     .stat-bar {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -814,7 +799,6 @@
       letter-spacing: 0.08em;
     }
 
-    /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
@@ -823,7 +807,6 @@
     .fade-in { opacity: 0; }
     .fade-in.visible { animation: fadeUp 0.7s forwards; }
 
-    /* ─── MOBILE ─── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: rgba(5,8,16,0.97); padding: 16px 24px 24px; border-bottom: 1px solid var(--card-border); gap: 4px; }
@@ -842,7 +825,6 @@
 </head>
 <body>
 
-<!-- ─── NAV ─── -->
 <nav>
   <div class="nav-inner">
     <a class="logo" href="#"><span class="logo-bracket">[</span>fadik22<span class="logo-bracket">]</span></a>
@@ -857,7 +839,6 @@
   </div>
 </nav>
 
-<!-- ─── HERO ─── -->
 <header>
   <div class="hero-grid"></div>
   <div class="hero-orb hero-orb-1"></div>
@@ -885,10 +866,8 @@
   </div>
 </header>
 
-<!-- ─── MAIN ─── -->
 <main>
 
-  <!-- FOCUS -->
   <section class="section fade-in" id="focus">
     <div class="section-corner"></div>
     <div class="section-title">
@@ -901,7 +880,6 @@
     </p>
   </section>
 
-  <!-- SKILLS -->
   <section class="section fade-in" id="skills">
     <div class="section-corner"></div>
     <div class="section-title"><span class="num">02</span> Навыки</div>
@@ -941,7 +919,6 @@
     </div>
   </section>
 
-  <!-- COURSES -->
   <section class="section fade-in" id="courses">
     <div class="section-corner"></div>
     <div class="section-title"><span class="num">03</span> Курсы</div>
@@ -968,7 +945,6 @@
 
     <div class="courses-grid">
 
-      <!-- 1 -->
       <a href="https://stepik.org/course/229484" target="_blank" class="course-card">
         <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> Stepik · 2026</div>
         <h3>Этический хакинг — уязвимости, взлом, защита</h3>
@@ -979,7 +955,6 @@
         </div>
       </a>
 
-      <!-- 2 -->
       <a href="https://stepik.org/course/266288" target="_blank" class="course-card">
         <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> Stepik · 2026</div>
         <h3>Этичный Веб-Хакинг (CyberSecurity)</h3>
@@ -990,7 +965,6 @@
         </div>
       </a>
 
-      <!-- 3 -->
       <a href="https://stepik.org/course/227643" target="_blank" class="course-card">
         <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> Stepik · 2026</div>
         <h3>Nmap + Сети (Сканирование и разведка)</h3>
@@ -1001,7 +975,6 @@
         </div>
       </a>
 
-      <!-- 4 -->
       <a href="https://webhacker.pro/course/21" target="_blank" class="course-card">
         <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> WebHacker · 2026</div>
         <h3>Кибербезопасность: Основы</h3>
@@ -1012,7 +985,6 @@
         </div>
       </a>
 
-      <!-- 5 NEW -->
       <a href="https://stepik.org/a/282465" target="_blank" class="course-card new-badge">
         <div class="course-platform"><i class="fas fa-circle" style="font-size:0.5rem"></i> Stepik · 2026</div>
         <h3>Python для хакеров (CyberSecurity)</h3>
@@ -1026,7 +998,6 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section class="section fade-in" id="projects">
     <div class="section-corner"></div>
     <div class="section-title"><span class="num">04</span> Проекты</div>
@@ -1034,7 +1005,6 @@
 
     <div class="projects-grid">
 
-      <!-- Russian Hacker Books -->
       <a href="https://github.com/fadik22/Russian-hacker-books" target="_blank" class="project-card">
         <div class="project-thumb" style="background: linear-gradient(135deg, #0d1b2a, #1a3a5c);">
           <i class="fas fa-book-skull" style="position:relative;z-index:1;color:var(--primary)"></i>
@@ -1052,7 +1022,6 @@
         </div>
       </a>
 
-      <!-- YouTube Main -->
       <a href="https://www.youtube.com/@fadik3125" target="_blank" class="project-card">
         <div class="project-thumb" style="background: linear-gradient(135deg, #1a0505, #3d0000);">
           <i class="fab fa-youtube" style="position:relative;z-index:1;color:#ff4444"></i>
@@ -1069,7 +1038,6 @@
         </div>
       </a>
 
-      <!-- YouTube Courses -->
       <a href="https://www.youtube.com/@fadikCourse" target="_blank" class="project-card">
         <div class="project-thumb" style="background: linear-gradient(135deg, #111, #1c1c1c);">
           <i class="fab fa-youtube" style="position:relative;z-index:1;color:#ff0000;filter:drop-shadow(0 0 12px rgba(255,0,0,0.6))"></i>
@@ -1086,7 +1054,6 @@
         </div>
       </a>
 
-      <!-- fadikVPN -->
       <a href="https://t.me/fadikvpnbot" target="_blank" class="project-card">
         <div class="project-thumb" style="background: linear-gradient(135deg, #0a1a0f, #0d2e1a);">
           <i class="fas fa-shield-halved" style="position:relative;z-index:1;color:var(--green)"></i>
@@ -1106,7 +1073,6 @@
     </div>
   </section>
 
-  <!-- TELEGRAM -->
   <section class="section fade-in" id="channels">
     <div class="section-corner"></div>
     <div class="section-title"><span class="num">05</span> Telegram-каналы</div>
@@ -1123,7 +1089,7 @@
           <span class="tg-count">644+</span>
         </div>
         <p class="tg-desc">Важные новости по кибербезопасности, хакингу и события в сфере ИБ.</p>
-        <a href="https://t.me/fadikCyber" target="_blank" class="tg-btn">
+        <a href="https://t.me/fadikCyberSec" target="_blank" class="tg-btn">
           <i class="fab fa-telegram-plane"></i> Подписаться
         </a>
       </div>
@@ -1137,7 +1103,7 @@
           <span class="tg-count">416+</span>
         </div>
         <p class="tg-desc">Всё необходимое для хакинга: инструменты, техники, обучающие материалы.</p>
-        <a href="https://t.me/+5IBduGEyXkgyNWUy" target="_blank" class="tg-btn">
+        <a href="https://t.me/+oQE0LIaR4x4wNTli" target="_blank" class="tg-btn">
           <i class="fab fa-telegram-plane"></i> Подписаться
         </a>
       </div>
@@ -1145,13 +1111,13 @@
       <div class="tg-card">
         <div class="tg-header">
           <div>
-            <div class="tg-name">@news_ethical_hack</div>
+            <div class="tg-name">@hacking_anons</div>
             <div class="tg-label">Новости курсов</div>
           </div>
           <span class="tg-count">480+</span>
         </div>
         <p class="tg-desc">Актуальные новости по моим курсам, обновления, акции и розыгрыши.</p>
-        <a href="https://t.me/news_ethical_hack" target="_blank" class="tg-btn">
+        <a href="https://t.me/hacking_anons" target="_blank" class="tg-btn">
           <i class="fab fa-telegram-plane"></i> Подписаться
         </a>
       </div>
@@ -1159,13 +1125,13 @@
       <div class="tg-card">
         <div class="tg-header">
           <div>
-            <div class="tg-name">@fadiknext</div>
+            <div class="tg-name">@fadikStart</div>
             <div class="tg-label">Hub проекта fadik22</div>
           </div>
           <span class="tg-count">673+</span>
         </div>
-        <p class="tg-desc">Все каналы и ссылки проекта fadik22 — навигационный хаб для обучения.</p>
-        <a href="https://t.me/fadiknext" target="_blank" class="tg-btn">
+        <p class="tg-desc">Все каналы и ссылки проекта fadik — навигационный хаб для обучения.</p>
+        <a href="https://t.me/fadikStart" target="_blank" class="tg-btn">
           <i class="fab fa-telegram-plane"></i> Подписаться
         </a>
       </div>
@@ -1173,13 +1139,13 @@
       <div class="tg-card" style="border-color: rgba(0,229,255,0.2); background: rgba(0,229,255,0.04);">
         <div class="tg-header">
           <div>
-            <div class="tg-name">@fadikproject</div>
-            <div class="tg-label">Проект fadik22 · Новый</div>
+            <div class="tg-name">@fadiHub</div>
+            <div class="tg-label">Проект fadik · Новый</div>
           </div>
           <span class="tg-count" style="background:rgba(255,61,113,0.1);color:var(--accent);border-color:rgba(255,61,113,0.2)">NEW</span>
         </div>
-        <p class="tg-desc">Официальный канал проекта fadik22 — главные новости, анонсы и контент.</p>
-        <a href="https://t.me/fadikproject" target="_blank" class="tg-btn">
+        <p class="tg-desc">Официальный канал проекта fadik — главные новости, анонсы и контент.</p>
+        <a href="https://t.me/fadikHub" target="_blank" class="tg-btn">
           <i class="fab fa-telegram-plane"></i> Подписаться
         </a>
       </div>
@@ -1187,18 +1153,17 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section class="section fade-in" id="contact">
     <div class="section-corner"></div>
     <div class="section-title"><span class="num">06</span> Связаться</div>
     <p class="section-desc">Всегда открыт для вопросов, коллабораций и обратной связи.</p>
 
     <div class="contact-grid">
-      <a href="https://t.me/fadik22official" target="_blank" class="contact-item">
+      <a href="https://t.me/fadikofficial" target="_blank" class="contact-item">
         <div class="contact-icon"><i class="fab fa-telegram-plane"></i></div>
         <div>
           <strong>Telegram</strong>
-          <span>@fadik22official</span>
+          <span>@fadikofficial</span>
         </div>
       </a>
       <a href="mailto:fadik22@proton.me" class="contact-item">
@@ -1220,22 +1185,20 @@
 
 </main>
 
-<!-- ─── FOOTER ─── -->
 <footer>
   <div class="footer-inner">
-    <span class="footer-logo">[fadik22]</span>
+    <span class="footer-logo">[fadik]</span>
     <div class="footer-links">
-      <a href="https://t.me/fadik22official">Telegram</a>
+      <a href="https://t.me/fadikofficial">Telegram</a>
       <a href="https://github.com/fadik22">GitHub</a>
-      <a href="https://t.me/fadiknext">Hub</a>
-      <a href="https://t.me/fadikproject">Канал</a>
+      <a href="https://t.me/fadikStart">Hub</a>
+      <a href="https://t.me/fadikHub">Канал</a>
     </div>
-    <p class="footer-copy">© 2026 fadik22 · fadikProject · Все права защищены</p>
+    <p class="footer-copy">© 2026 fadik · fadikHub · Все права защищены</p>
   </div>
 </footer>
 
 <script>
-// ─── TERMINAL TYPEWRITER ───
 const term = document.getElementById('terminalLine');
 const cmds = ['whoami', 'load @fadiknext', 'scan --target web', 'exploit --mode ethical', 'python hack.py', 'reboot'];
 let ci = 0, idx = 0, phase = 'type', txt = '';
@@ -1255,7 +1218,6 @@ function typeLoop() {
 }
 typeLoop();
 
-// ─── NAV TOGGLE ───
 document.getElementById('menuToggle').addEventListener('click', () => {
   document.getElementById('navLinks').classList.toggle('open');
 });
@@ -1263,7 +1225,6 @@ document.querySelectorAll('#navLinks a').forEach(a => {
   a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
 });
 
-// ─── SMOOTH SCROLL ───
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
@@ -1271,13 +1232,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ─── INTERSECTION OBSERVER ───
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 
-// ─── COUNTER ANIMATION ───
 const countIO = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
